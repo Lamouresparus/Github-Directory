@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Grey Assessment</string>
+    <string name="repositories">Repositories</string>
+    <string name="home">Home</string>
+    <string name="users">Users</string>
+    <string name="user_profile">User Profile</string>
+    <string name="search">Search</string>
+    <string name="search_for">Search for…</string>
+    <string name="search_for_repositories">Search for repositories…</string>
+    <string name="search_for_users">Search for users…</string>
+    <string name="search_github_for_repositories">Search Github for repositories, issues and pull requests!</string>
+    <string name="search_github_for_users">Search Github for users…</string>
+    <string name="user_error_message">We’ve searched the ends of the earth and we’ve not found this user, please try again</string>
+    <string name="repository_error_message">We’ve searched the ends of the earth, repository not found, please try again</string>
+    <string name="stars">stars</string>
+    <string name="stack">stack</string>
+</resources>
