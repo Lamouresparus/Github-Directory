@@ -17,4 +17,7 @@
     <color name="dove_gray">#FF727272</color>
     <color name="lily_white">#FFE8F9FF</color>
     <color name="ripe_plum">#FF62006A</color>
+    <color name="cod_gray">#FF1A1A1A</color>
+    <color name="cod_gray_55">#8C1A1A1A</color>
+    <color name="seashell">#FFF1F1F1</color>
 </resources>

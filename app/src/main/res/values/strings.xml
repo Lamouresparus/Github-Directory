@@ -14,4 +14,7 @@
     <string name="repository_error_message">We’ve searched the ends of the earth, repository not found, please try again</string>
     <string name="stars">stars</string>
     <string name="stack">stack</string>
+    <string name="location">location</string>
+    <string name="user_blog">user blog</string>
+    <string name="followers">followers</string>
 </resources>
