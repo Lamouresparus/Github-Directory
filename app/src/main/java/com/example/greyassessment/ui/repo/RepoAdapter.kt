@@ -9,24 +9,20 @@ import coil.load
 import com.example.greyassessment.databinding.RepoItemViewBinding
 import com.example.greyassessment.ui.model.Repo
 
-class RepoAdapter(private val onClick: (Repo) -> Unit) :
+class RepoAdapter :
     ListAdapter<Repo, RepoAdapter.RepoViewHolder>(Repo.DIFF_UTIL) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoViewHolder {
         val binding = RepoItemViewBinding.inflate(LayoutInflater.from(parent.context))
-        return RepoViewHolder(binding) { onClick.invoke(getItem(it)) }
+        return RepoViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: RepoViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    class RepoViewHolder(private val binding: RepoItemViewBinding, onClick: (Int) -> Unit) :
+    class RepoViewHolder(private val binding: RepoItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
-        init {
-            //onClick(adapterPosition)
-        }
 
         fun bind(item: Repo) {
             // set data to views

@@ -1,6 +1,5 @@
 package com.example.greyassessment.ui.users
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -9,7 +8,7 @@ import com.example.greyassessment.domain.Result
 import com.example.greyassessment.domain.usecase.GetGitHubUsers
 import com.example.greyassessment.domain.usecase.GetUserDetails
 import com.example.greyassessment.ui.model.UserDetail
-import com.example.greyassessment.ui.model.mapToRModel
+import com.example.greyassessment.ui.model.mapToModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -36,10 +35,9 @@ class UsersViewModel @Inject constructor(
                     result.data.map {
                         when (val user = getUserDetails.execute(it.username)) {
                             is Result.Error -> _uiState.emit(UiState.Error(user.errorMsg))
-                            is Result.Success -> users.add(user.data.mapToRModel())
+                            is Result.Success -> users.add(user.data.mapToModel())
                         }
                     }
-                    Log.v("responce", users.toString())
                     _uiState.emit(UiState.Loaded(users))
 
                 }

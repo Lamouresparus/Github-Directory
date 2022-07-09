@@ -4,9 +4,9 @@ import com.example.greyassessment.domain.model.RepoDomain
 import com.example.greyassessment.domain.model.UserDetailDomain
 import com.example.greyassessment.domain.model.UserDomain
 
-fun RepoDomain.mapToRModel(): Repo = Repo(
+fun RepoDomain.mapToModel(): Repo = Repo(
     name = name,
-    owner = owner.mapToRModel(),
+    owner = owner.mapToModel(),
     watchers = watchers,
     language = language,
     topics = topics,
@@ -15,7 +15,7 @@ fun RepoDomain.mapToRModel(): Repo = Repo(
     pushed_at = pushed_at
 )
 
-fun UserDetailDomain.mapToRModel(): UserDetail = UserDetail(
+fun UserDetailDomain.mapToModel(): UserDetail = UserDetail(
     username = username,
     avatarUrl = avatarUrl,
     githubUrl = githubUrl,
@@ -29,7 +29,7 @@ fun UserDetailDomain.mapToRModel(): UserDetail = UserDetail(
     blog = blog
 )
 
-fun UserDomain.mapToRModel(): User = User(
+fun UserDomain.mapToModel(): User = User(
     username = username,
     avatarUrl = avatarUrl,
     githubUrl = githubUrl

@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.greyassessment.domain.Result
 import com.example.greyassessment.domain.usecase.GetGitHubRepo
 import com.example.greyassessment.ui.model.Repo
-import com.example.greyassessment.ui.model.mapToRModel
+import com.example.greyassessment.ui.model.mapToModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -27,7 +27,7 @@ class RepoViewModel @Inject constructor(
         viewModelScope.launch(dispatcher) {
             _uiState.emit(UiState.Loading)
             when (val result = getGitHubRepo.execute(repo)) {
-                is Result.Success -> _uiState.emit(UiState.Loaded(result.data.map { it.mapToRModel() }))
+                is Result.Success -> _uiState.emit(UiState.Loaded(result.data.map { it.mapToModel() }))
                 is Result.Error -> _uiState.emit(UiState.Error(result.errorMsg))
             }
         }

@@ -71,6 +71,10 @@ class UsersFragment : Fragment() {
     }
 
     private fun showLoaded(users: List<UserDetail>) {
+        if(users.isEmpty()){
+            showError()
+            return
+        }
         binding.searchLayout.searchEditText.setText("")
         binding.emptySearchLayout.emptySearchView.visibility = View.GONE
         binding.usersRv.visibility = View.VISIBLE

@@ -20,4 +20,5 @@
     <string name="no_bio">No Bio</string>
     <string name="unknown_location">Unknown location</string>
     <string name="github_user">Github User</string>
+    <string name="empty_user_repo_message">This user  doesn’t have repositories yet, come back later :-)</string>
 </resources>

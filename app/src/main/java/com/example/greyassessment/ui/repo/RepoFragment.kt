@@ -72,11 +72,15 @@ class RepoFragment : Fragment() {
     }
 
     private fun showLoaded(repos: List<Repo>) {
+        if (repos.isEmpty()) {
+            showError()
+            return
+        }
         binding.searchLayout.searchEditText.setText("")
         binding.emptySearchLayout.emptySearchView.visibility = View.GONE
         binding.repoRv.visibility = View.VISIBLE
         binding.repoProgressBar.visibility = View.GONE
-        val repoAdapter = RepoAdapter {}
+        val repoAdapter = RepoAdapter()
         binding.repoRv.apply {
             layoutManager = LinearLayoutManager(
                 context
