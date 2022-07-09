@@ -42,13 +42,10 @@ class RepoFragment : Fragment() {
                 is RepoViewModel.UiState.Loaded -> showLoaded(it.repos)
                 is RepoViewModel.UiState.Loading -> showLoading()
             }
-
         }
-
     }
 
     private fun setupViews() {
-
         binding.searchLayout.searchEditText.setHint(R.string.search_for_repositories)
         binding.emptySearchLayout.text.setText(R.string.search_github_for_repositories)
         binding.searchLayout.searchButton.setOnClickListener { search() }
@@ -87,5 +84,10 @@ class RepoFragment : Fragment() {
             adapter = repoAdapter
         }
         repoAdapter.submitList(repos)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _viewBinding = null
     }
 }

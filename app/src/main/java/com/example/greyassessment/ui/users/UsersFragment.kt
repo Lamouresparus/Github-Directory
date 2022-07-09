@@ -1,17 +1,16 @@
 package com.example.greyassessment.ui.users
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.greyassessment.R
 import com.example.greyassessment.databinding.FragmentUsersBinding
 import com.example.greyassessment.ui.model.UserDetail
-import com.example.greyassessment.ui.repo.RepoAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -76,7 +75,9 @@ class UsersFragment : Fragment() {
         binding.emptySearchLayout.emptySearchView.visibility = View.GONE
         binding.usersRv.visibility = View.VISIBLE
         binding.usersProgressBar.visibility = View.GONE
-        val userAdapter = UserAdapter {}
+        val userAdapter = UserAdapter {
+            navigateToUserDetail(it)
+        }
         binding.usersRv.apply {
             layoutManager = LinearLayoutManager(
                 context
@@ -84,6 +85,10 @@ class UsersFragment : Fragment() {
             adapter = userAdapter
         }
         userAdapter.submitList(users)
+    }
+
+    private fun navigateToUserDetail(user: UserDetail) {
+        findNavController().navigate(UsersFragmentDirections.actionUsersFragmentToUserDetailFragment(user))
     }
 
 

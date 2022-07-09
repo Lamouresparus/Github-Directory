@@ -1,8 +1,10 @@
 package com.example.greyassessment.ui.model
 
+import android.os.Parcelable
 import androidx.recyclerview.widget.DiffUtil
+import kotlinx.parcelize.Parcelize
 
-
+@Parcelize
 data class UserDetail(
     val username: String,
     val avatarUrl: String,
@@ -15,17 +17,15 @@ data class UserDetail(
     val bio: String,
     val email: String,
     val blog: String
-) {
-    companion object {
-        val DIFF_UTIL = object : DiffUtil.ItemCallback<UserDetail>() {
-            override fun areItemsTheSame(oldItem: UserDetail, newItem: UserDetail): Boolean {
-                return oldItem.username == newItem.username
-            }
+) : Parcelable
 
-            override fun areContentsTheSame(oldItem: UserDetail, newItem: UserDetail): Boolean {
-                return oldItem == newItem
-            }
+class DIFF_UTIL : DiffUtil.ItemCallback<UserDetail>() {
+    override fun areItemsTheSame(oldItem: UserDetail, newItem: UserDetail): Boolean {
+        return oldItem.username == newItem.username
+    }
 
-        }
+    override fun areContentsTheSame(oldItem: UserDetail, newItem: UserDetail): Boolean {
+        return oldItem == newItem
     }
 }
+

@@ -17,4 +17,7 @@
     <string name="location">location</string>
     <string name="user_blog">user blog</string>
     <string name="followers">followers</string>
+    <string name="no_bio">No Bio</string>
+    <string name="unknown_location">Unknown location</string>
+    <string name="github_user">Github User</string>
 </resources>

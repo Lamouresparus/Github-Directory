@@ -98,7 +98,7 @@
         tools:ignore="SmallSp" />
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/link_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -116,9 +116,9 @@
         android:fontFamily="@font/manrope_medium"
         android:textColor="@color/cod_gray"
         android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
-        app:layout_constraintStart_toEndOf="@+id/imageView8"
-        app:layout_constraintTop_toTopOf="@+id/imageView8"
+        app:layout_constraintBottom_toBottomOf="@+id/link_image"
+        app:layout_constraintStart_toEndOf="@+id/link_image"
+        app:layout_constraintTop_toTopOf="@+id/link_image"
         tools:ignore="SmallSp" />
 
     <ImageView

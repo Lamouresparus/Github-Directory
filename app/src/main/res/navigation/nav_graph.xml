@@ -9,15 +9,35 @@
         android:id="@+id/homeFragment"
         android:name="com.example.greyassessment.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_repoFragment"
+            app:destination="@id/repoFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_usersFragment"
+            app:destination="@id/usersFragment" />
+    </fragment>
     <fragment
         android:id="@+id/usersFragment"
         android:name="com.example.greyassessment.ui.users.UsersFragment"
         android:label="fragment_users"
-        tools:layout="@layout/fragment_users" />
+        tools:layout="@layout/fragment_users" >
+        <action
+            android:id="@+id/action_usersFragment_to_userDetailFragment"
+            app:destination="@id/userDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/repoFragment"
         android:name="com.example.greyassessment.ui.repo.RepoFragment"
         android:label="fragment_repo"
         tools:layout="@layout/fragment_repo" />
+    <fragment
+        android:id="@+id/userDetailFragment"
+        android:name="com.example.greyassessment.ui.user_detail.UserDetailFragment"
+        android:label="fragment_user_detail"
+        tools:layout="@layout/fragment_user_detail" >
+        <argument
+            android:name="user_detail"
+            app:argType="com.example.greyassessment.ui.model.UserDetail" />
+    </fragment>
 </navigation>

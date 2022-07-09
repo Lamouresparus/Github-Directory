@@ -1,5 +1,6 @@
 package com.example.greyassessment.ui.users
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -38,6 +39,7 @@ class UsersViewModel @Inject constructor(
                             is Result.Success -> users.add(user.data.mapToRModel())
                         }
                     }
+                    Log.v("responce", users.toString())
                     _uiState.emit(UiState.Loaded(users))
 
                 }
