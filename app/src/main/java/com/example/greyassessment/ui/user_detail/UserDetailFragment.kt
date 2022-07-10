@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
@@ -16,6 +19,7 @@ import com.example.greyassessment.databinding.FragmentUserDetailBinding
 import com.example.greyassessment.ui.model.Repo
 import com.example.greyassessment.ui.model.UserDetail
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @RequiresApi(Build.VERSION_CODES.O)
 @AndroidEntryPoint
@@ -40,11 +44,13 @@ class UserDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupViews(user.userDetail)
 
-        viewModel.uiState.observe(viewLifecycleOwner) {
-            when (it) {
-                is UserDetailViewModel.UiState.Error -> showError()
-                is UserDetailViewModel.UiState.Loaded -> showRepo(it.users)
-                is UserDetailViewModel.UiState.Loading -> showLoading()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.uiState.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED).collect{
+                when (it) {
+                    is UserDetailViewModel.UiState.Error -> showError()
+                    is UserDetailViewModel.UiState.Loaded -> showRepo(it.repos)
+                    is UserDetailViewModel.UiState.Loading -> showLoading()
+                }
             }
         }
     }
@@ -64,7 +70,7 @@ class UserDetailFragment : Fragment() {
     }
 
     private fun setupViews(userDetail: UserDetail) {
-        viewModel.getGithubUsers(userDetail.username)
+        viewModel.getGithubUserRepo(userDetail.username)
         userDetail.apply {
             binding.userDetailName.text = name.ifBlank { getString(R.string.github_user) }
             binding.userDetailImage.load(avatarUrl)

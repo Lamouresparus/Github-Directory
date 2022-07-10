@@ -1,17 +1,20 @@
 package com.example.greyassessment.ui.repo
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.greyassessment.R
 import com.example.greyassessment.databinding.FragmentRepoBinding
 import com.example.greyassessment.ui.model.Repo
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RepoFragment : Fragment() {
@@ -32,15 +35,17 @@ class RepoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.uiState.observe(viewLifecycleOwner) {
-            when (it) {
-                is RepoViewModel.UiState.Default -> setupViews()
-                is RepoViewModel.UiState.Error -> {
-                    showError()
-                    Log.v("error is ", it.message)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.uiState.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED).collect {
+                when (it) {
+                    is RepoViewModel.UiState.Default -> setupViews()
+                    is RepoViewModel.UiState.Error -> {
+                        showError()
+                    }
+                    is RepoViewModel.UiState.Loaded -> showLoaded(it.repos)
+                    is RepoViewModel.UiState.Loading -> showLoading()
                 }
-                is RepoViewModel.UiState.Loaded -> showLoaded(it.repos)
-                is RepoViewModel.UiState.Loading -> showLoading()
             }
         }
     }

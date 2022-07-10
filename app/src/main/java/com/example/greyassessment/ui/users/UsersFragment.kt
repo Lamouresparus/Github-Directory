@@ -6,12 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.greyassessment.R
 import com.example.greyassessment.databinding.FragmentUsersBinding
 import com.example.greyassessment.ui.model.UserDetail
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class UsersFragment : Fragment() {
@@ -32,14 +36,18 @@ class UsersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.uiState.observe(viewLifecycleOwner) {
-            when (it) {
-                is UsersViewModel.UiState.Default -> setupViews()
-                is UsersViewModel.UiState.Error -> showError()
-                is UsersViewModel.UiState.Loaded -> showLoaded(it.users)
-                is UsersViewModel.UiState.Loading -> showLoading()
-            }
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.uiState
+                .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                .collect {
+                    when (it) {
+                        is UsersViewModel.UiState.Default -> setupViews()
+                        is UsersViewModel.UiState.Error -> showError()
+                        is UsersViewModel.UiState.Loaded -> showLoaded(it.users)
+                        is UsersViewModel.UiState.Loading -> showLoading()
+                    }
+                }
         }
 
     }
@@ -71,7 +79,7 @@ class UsersFragment : Fragment() {
     }
 
     private fun showLoaded(users: List<UserDetail>) {
-        if(users.isEmpty()){
+        if (users.isEmpty()) {
             showError()
             return
         }
@@ -92,7 +100,11 @@ class UsersFragment : Fragment() {
     }
 
     private fun navigateToUserDetail(user: UserDetail) {
-        findNavController().navigate(UsersFragmentDirections.actionUsersFragmentToUserDetailFragment(user))
+        findNavController().navigate(
+            UsersFragmentDirections.actionUsersFragmentToUserDetailFragment(
+                user
+            )
+        )
     }
 
 

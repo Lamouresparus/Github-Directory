@@ -11,6 +11,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,7 +22,7 @@ class RepoViewModel @Inject constructor(
 
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
     private val _uiState = MutableStateFlow<UiState>(UiState.Default)
-    val uiState = _uiState.asLiveData()
+    val uiState = _uiState as StateFlow<UiState>
 
     fun getGithubRepo(repo: String) {
         viewModelScope.launch(dispatcher) {

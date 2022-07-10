@@ -78,9 +78,8 @@ dependencies {
     // Coil
     implementation "io.coil-kt:coil:1.4.0"
 
-
-    // coroutine
-//    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
-//
-//    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1'
+    // test
+    testImplementation 'app.cash.turbine:turbine:0.8.0'
+    testImplementation "io.mockk:mockk:1.12.3"
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1'
 }
