@@ -1,6 +1,7 @@
 package com.example.greyassessment.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -22,13 +23,19 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun setupViews()
-    {
-        // Finding the Navigation Controller
-        var navController = findNavController(R.id.fragNavHost)
-
-        // Setting Navigation Controller with the BottomNavigationView
+    private fun setupViews() {
+        val navController = findNavController(R.id.fragNavHost)
         binding.bottomNav.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.userDetailFragment) {
+
+                binding.bottomNav.visibility = View.GONE
+            } else {
+
+                binding.bottomNav.visibility = View.VISIBLE
+            }
+        }
 
     }
 }

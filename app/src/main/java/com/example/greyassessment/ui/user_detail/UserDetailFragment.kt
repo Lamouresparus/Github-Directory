@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
@@ -70,6 +71,7 @@ class UserDetailFragment : Fragment() {
     }
 
     private fun setupViews(userDetail: UserDetail) {
+        binding.toolbar.setNavigationOnClickListener { navigateBack() }
         viewModel.getGithubUserRepo(userDetail.username)
         userDetail.apply {
             binding.userDetailName.text = name.ifBlank { getString(R.string.github_user) }
@@ -87,6 +89,10 @@ class UserDetailFragment : Fragment() {
                 binding.userWebsite.text = userDetail.blog
             }
         }
+    }
+
+    private fun navigateBack() {
+        findNavController().navigateUp()
     }
 
     private fun showRepo(repos: List<Repo>) {
