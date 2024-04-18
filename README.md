@@ -1,6 +1,5 @@
-# GreyAssessment
-GreyAssessment is an Android application that searches for Github Repositories and Users from the GitHub API (Application Programming Interface). The app has four screens Home, Repository, Users, and UserDetail.
-This application was an assessment for an Android Developer position at Grey.
+# Github Directory
+Github Directory is an Android application that searches for Github Repositories and Users from the GitHub API (Application Programming Interface). The app has four screens Home, Repository, Users, and UserDetail.
 
 ## Screenshot
 <img width="306" alt="Screenshot 2022-07-11 at 05 37 10" src="https://user-images.githubusercontent.com/34775925/178189480-3581f815-60f2-4fd8-8397-570e24b3fc7f.png"> <img width="306" alt="Screenshot 2022-07-11 at 05 36 46" src="https://user-images.githubusercontent.com/34775925/178189443-95eefe7c-f57c-4c96-abc7-124ce94f8ddd.png"> <img width="306" alt="Screenshot 2022-07-11 at 05 40 43" src="https://user-images.githubusercontent.com/34775925/178189820-eaa198e4-c728-4599-ada4-9fc1181ec6d1.png">
